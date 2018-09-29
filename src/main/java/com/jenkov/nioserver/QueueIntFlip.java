@@ -14,8 +14,11 @@ public class QueueIntFlip {
     public int[] elements = null;
 
     public int capacity = 0;
+    //已写位置
     public int writePos = 0;
+    //已读位置
     public int readPos  = 0;
+    //writePos < readPos
     public boolean flipped = false;
 
     public QueueIntFlip(int capacity) {

@@ -13,7 +13,6 @@ import java.util.concurrent.BlockingQueue;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         String httpResponse = "HTTP/1.1 200 OK\r\n" +
                 "Content-Length: 38\r\n" +
                 "Content-Type: text/html\r\n" +
@@ -26,6 +25,7 @@ public class Main {
             System.out.println("Message Received from socket: " + request.socketId);
 
             Message response = writeProxy.getMessage();
+            //通过 socketId 确定message 属于哪个 socket
             response.socketId = request.socketId;
             response.writeToMessage(httpResponseBytes);
 

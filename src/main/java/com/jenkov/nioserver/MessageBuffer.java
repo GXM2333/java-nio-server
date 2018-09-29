@@ -56,7 +56,7 @@ public class MessageBuffer {
 
         return message;
     }
-
+    //copy 的方式获得地址连续的message
     public boolean expandMessage(Message message){
         if(message.capacity == CAPACITY_SMALL){
             return moveMessage(message, this.smallMessageBufferFreeBlocks, this.mediumMessageBufferFreeBlocks, this.mediumMessageBuffer, CAPACITY_MEDIUM);

@@ -15,8 +15,9 @@ import java.util.List;
  */
 public class HttpMessageReader implements IMessageReader {
 
+    //resizable buffer
     private MessageBuffer messageBuffer    = null;
-
+    //完整的per message
     private List<Message> completeMessages = new ArrayList<Message>();
     private Message       nextMessage      = null;
 

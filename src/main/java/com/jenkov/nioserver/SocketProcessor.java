@@ -11,7 +11,7 @@ import java.util.*;
  * Created by jjenkov on 16-10-2015.
  */
 public class SocketProcessor implements Runnable {
-
+    //accept socket queue from socketAccepter
     private Queue<Socket>  inboundSocketQueue   = null;
 
     private MessageBuffer  readMessageBuffer    = null; //todo   Not used now - but perhaps will be later - to check for space in the buffer before reading from sockets
@@ -22,7 +22,7 @@ public class SocketProcessor implements Runnable {
     private Queue<Message> outboundMessageQueue = new LinkedList<>(); //todo use a better / faster queue.
 
     private Map<Long, Socket> socketMap         = new HashMap<>();
-
+    //socket 服务的内存空间
     private ByteBuffer readByteBuffer  = ByteBuffer.allocate(1024 * 1024);
     private ByteBuffer writeByteBuffer = ByteBuffer.allocate(1024 * 1024);
     private Selector   readSelector    = null;
@@ -70,6 +70,7 @@ public class SocketProcessor implements Runnable {
 
 
     public void executeCycle() throws IOException {
+        //全部接收完所有socket之后，将socket中
         takeNewSockets();
         readFromSockets();
         writeToSockets();
@@ -92,7 +93,7 @@ public class SocketProcessor implements Runnable {
 
             SelectionKey key = newSocket.socketChannel.register(this.readSelector, SelectionKey.OP_READ);
             key.attach(newSocket);
-
+           // 不断创建放入接受队列中的socket
             newSocket = this.inboundSocketQueue.poll();
         }
     }
@@ -104,7 +105,7 @@ public class SocketProcessor implements Runnable {
         if(readReady > 0){
             Set<SelectionKey> selectedKeys = this.readSelector.selectedKeys();
             Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
-
+            //一直直到读完
             while(keyIterator.hasNext()) {
                 SelectionKey key = keyIterator.next();
 

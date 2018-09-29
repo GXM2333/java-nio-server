@@ -15,7 +15,7 @@ public class HttpUtil {
 
     private static final byte[] HOST           = new byte[]{'H','o','s','t'};
     private static final byte[] CONTENT_LENGTH = new byte[]{'C','o','n','t','e','n','t','-','L','e','n','g','t','h'};
-
+    //-1 表示读取完毕
     public static int parseHttpRequest(byte[] src, int startIndex, int endIndex, HttpHeaders httpHeaders){
 
 
